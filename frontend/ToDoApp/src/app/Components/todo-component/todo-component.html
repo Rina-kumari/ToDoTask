@@ -1,0 +1,44 @@
+<div class="todo-container">
+  <div class="header">
+    <h1>My Tasks</h1>
+    <div class="search-group">
+      <input type="text" placeholder="Search tasks..." [(ngModel)]="searchText" (input)="onSearchChange()"/>
+    </div>
+    <button class="btn-primary" routerLink="/addTask">+ Add New Task</button>
+  </div>
+  
+  <div class="filters">
+    <div class="filter-group">
+      <label>Status:</label>
+        <select [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+          <option value="">All</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+      <label>Priority:</label>
+        <select [(ngModel)]="selectedPriority" (change)="onPriorityChange()">
+          <option value="">All</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
+      </select>
+    </div>
+  </div>
+
+ <div class="card-display">
+            @for(task of filteredTasks; track task.task_id){
+            <!--@for(task of tasks;track $index)-->
+                <div>
+                    <app-todo-card-component [task]="task"></app-todo-card-component>
+                </div>
+            }@empty {
+                <h6>No Task Found</h6>
+            }   
+        </div>
+</div>

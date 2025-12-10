@@ -1,0 +1,69 @@
+<body>
+  <div class="form-container">
+
+    <h2>{{id ? 'Update Task' : 'Add New Task'}}</h2>
+
+    <form [formGroup]="taskForm" (ngSubmit)="id ? updateTask() : addTask()">
+    
+    <mat-form-field>
+      <mat-label>Task</mat-label>
+      <input matInput type="text" formControlName="title">
+      <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+        Title is required
+      </mat-error>
+      <mat-error *ngIf="taskForm.get('title')?.hasError('maxlength')">
+        Title cannot exceed 255 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" formControlName="description"></textarea>
+      <mat-error *ngIf="taskForm.get('description')?.hasError('maxlength')">
+        Description cannot exceed 500 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+          {{status.label}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="taskForm.get('status')?.hasError('required')">
+        Status is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+       <mat-option *ngFor="let priority of priorityOptions" [value]="priority.value">
+        {{priority.label}}
+       </mat-option>
+      </mat-select>
+      <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">
+        Priority is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Choose due date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="due_date">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <section>
+      <div class="example-button-row">
+        <button mat-raised-button type="button" routerLink="/tasks">Cancel</button>
+      
+        <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+            {{id ? 'Update Task' : 'Create Task'}}
+        </button>
+      </div>
+    </section>
+ </form>
+  </div>
+</body>

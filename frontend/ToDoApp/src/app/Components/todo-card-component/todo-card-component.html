@@ -1,0 +1,28 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title class="task-title">{{task.title}}</mat-card-title>
+    <mat-card-subtitle>{{task.status}} - {{task.priority}}</mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <p class="task-description">{{ task.description || 'No description' }}</p>
+    <p><strong>Due Date:</strong> {{task.due_date | date}}</p>
+    <p><strong>Created:</strong> {{task.created_at | date}}</p>
+    <p><strong>Updated:</strong> {{task.updated_at | date}}</p>
+
+    <!-- DEBUG INFO 
+    <div style="background: #ffeb3b; padding: 10px; margin: 10px 0;">
+      <p><strong>DEBUG - Status:</strong> "{{task.status}}"</p>
+      <p><strong>DEBUG - Completed At:</strong> "{{task.completed_at}}"</p>
+      <p><strong>DEBUG - Is null?:</strong> {{task.completed_at === null}}</p>
+      <p><strong>DEBUG - Is undefined?:</strong> {{task.completed_at === undefined}}</p>
+      <p><strong>DEBUG - isCompleted():</strong> {{isCompleted()}}</p>
+    </div> -->
+    <p *ngIf="isCompleted()"><strong>Completed:</strong> {{task.completed_at | date}}</p>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button mat-button (click)="editTask()">EDIT</button>
+    <button mat-button (click)="deleteTask()">DELETE</button>
+  </mat-card-actions>
+</mat-card>
