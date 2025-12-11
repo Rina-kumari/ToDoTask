@@ -2,14 +2,13 @@
 require('dotenv').config();
 
 // constant or module
-
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
+const path = require('path'); 
 const controller = require('./Controller/controller');
-
 
 // create nodejs server
 app.use(cors());
@@ -20,10 +19,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(controller);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/dist/ToDoApp/browser')));
+    app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/dist/ToDoApp/browser/index.html')));
+}
+
 app.listen(port, '0.0.0.0', (err)=>{
     if(err) throw err;
     console.log(`server is running on port: ${port}`);
-    
 })
 
 
