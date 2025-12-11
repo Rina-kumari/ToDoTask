@@ -1,16 +1,26 @@
+// Load environment variables
+require('dotenv').config();
+
 // create postgresql connection and pool
+const { Pool } = require("pg");
 
-const {user,password,database} = require("pg/lib/defaults");
+//const {user,password,database} = require("pg/lib/defaults");
 
-const pgsqlPool = require("pg").Pool;
+//const pgsqlPool = require("pg").Pool;
 
-const pool = new pgsqlPool({
+/*const pool = new pgsqlPool({
     user:"postgres",
     password:"rina@123",
     database:"To_Do_List",
     host:"localhost",
     port:5432,
     max:10
+});*/
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,  // Reads from .env
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    max: 10
 });
 
 pool.connect((err,connection)=>{

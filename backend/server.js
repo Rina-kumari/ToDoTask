@@ -1,9 +1,12 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 // constant or module
 
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const controller = require('./Controller/controller');
 
@@ -17,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(controller);
 
-app.listen(port, (err)=>{
+app.listen(port, '0.0.0.0', (err)=>{
     if(err) throw err;
     console.log(`server is running on port: ${port}`);
     
