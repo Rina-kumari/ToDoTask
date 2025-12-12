@@ -11,7 +11,10 @@ const path = require('path');
 const controller = require('./Controller/controller');
 
 // create nodejs server
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:4200'
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
