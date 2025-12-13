@@ -11,14 +11,28 @@ router.use(bodyParser.urlencoded({
 }))
 
 //get
-router.get("/tasks",(req,res)=>{
+/*router.get("/tasks",(req,res)=>{
     const sql = `select * from "ToDoListSchema"."Tasks"`;
     db.query(sql,(err,result)=>{
         if(err) throw res.json(err);
         return res.status(200).json(result.rows);
         console.log("todo list is working");
     })
-})
+})*/
+
+router.get("/tasks", async (req, res) => {
+    console.log('GET /tasks called');
+    try {
+        const sql = `SELECT * FROM "ToDoListSchema"."Tasks"`;
+        const result = await db.query(sql);
+        console.log('Query successful, rows:', result.rows.length);
+        return res.status(200).json(result.rows);
+    } catch (err) {
+        console.error('Error in GET /tasks:', err.message);
+        console.error('Full error:', err);
+        return res.status(500).json({ error: err.message });
+    }
+});
 
 //getById
 

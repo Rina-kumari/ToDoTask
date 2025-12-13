@@ -22,6 +22,17 @@ app.use(bodyParser.urlencoded({
 
 app.use(controller);
 
+app.use((err, req, res, next) => {
+    console.error('Express error:', err);
+    res.status(500).json({ error: err.message });
+});
+
+// Add 404 handler
+app.use((req, res) => {
+    console.log('404 - Route not found:', req.path);
+    res.status(404).json({ error: 'Route not found' });
+});
+
 app.listen(port, '0.0.0.0', (err)=>{
     if(err) throw err;
     console.log(`Server is running on port: ${port}`);
