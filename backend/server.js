@@ -33,7 +33,11 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(port, '0.0.0.0', (err)=>{
-    if(err) throw err;
-    console.log(`Server is running on port: ${port}`);
+app.listen(PORT, (err) => {  // Remove '0.0.0.0'
+    if(err) {
+        console.error('Server failed to start:', err);
+        throw err;
+    }
+    console.log(`Server is running on port: ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
 });
