@@ -17,9 +17,9 @@ const controller = require('./Controller/controller');
 
 app.use(cors({
   origin: [
-    'http://localhost:4200', // Local development
-    'https://your-app.vercel.app', // You'll update this after deployment
-    'https://*.vercel.app' // Allows all Vercel preview deployments
+    'http://localhost:4200',
+    'https://to-do-task-vert.vercel.app',  // ← Your Vercel URL
+    'https://*.vercel.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
