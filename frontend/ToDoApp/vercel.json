@@ -1,3 +1,11 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "version": 2,
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist/ToDoApp/browser",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
