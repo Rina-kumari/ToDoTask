@@ -1,5 +1,7 @@
 {
-  "version": 2,
+  "buildCommand": "npm install && npx ng build --output-path=dist/browser",
+  "outputDirectory": "dist/browser",
+  "framework": null,
   "routes": [
     {
       "src": "/(.*)",
