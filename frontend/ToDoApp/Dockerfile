@@ -8,6 +8,5 @@ RUN npm run build
 FROM node:20-alpine
 WORKDIR /app
 RUN npm install -g http-server
-COPY --from=build /app/dist/ToDoApp/browser ./dist
-ENV PORT=8080
-CMD http-server dist -p $PORT
+COPY --from=build /app/dist ./dist
+CMD ["sh", "-c", "http-server dist/ToDoApp/browser -p 8080"]
