@@ -18,7 +18,7 @@ const controller = require('./Controller/controller');
 app.use(cors({
   origin: [
     'http://localhost:4200',
-    'https://to-do-task-vert.vercel.app',  // ← Your Vercel URL
+    'to-do-project-dun.vercel.app',  // ← Your Vercel URL
     'https://*.vercel.app'
   ],
   credentials: true,
