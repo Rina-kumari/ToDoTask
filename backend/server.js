@@ -10,9 +10,20 @@ const bodyParser = require('body-parser');
 const controller = require('./Controller/controller');
 
 // create nodejs server
-app.use(cors({
+/*app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
   credentials: true
+}));*/
+
+app.use(cors({
+  origin: [
+    'http://localhost:4200', // Local development
+    'https://your-app.vercel.app', // You'll update this after deployment
+    'https://*.vercel.app' // Allows all Vercel preview deployments
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(bodyParser.json());
